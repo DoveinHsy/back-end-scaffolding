@@ -1,0 +1,22 @@
+HELP.md
+target/
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+logs/
+*.log
+.flattened-pom.xml
+
+
+### IntelliJ IDEA ###
+.idea
+.idea/*
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+/apollo-quick-start-master/

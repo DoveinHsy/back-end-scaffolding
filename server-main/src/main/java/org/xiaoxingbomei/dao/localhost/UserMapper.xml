@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.xiaoxingbomei.dao.localhost.UserMapper" >
+
+
+
+    <resultMap id="UserResultMap" type="org.xiaoxingbomei.vo.User">
+        <result property="name"          column="name"/>
+        <result property="gender"        column="gender"/>
+        <result property="idCard"        column="idCard"/>
+        <result property="phoneNumber"   column="phoneNumber"/>
+        <result property="mobileNumber"  column="mobileNumber"/>
+        <result property="address"       column="address"/>
+        <result property="nationality"   column="nationality"/>
+        <result property="country"       column="country"/>
+        <result property="state"         column="state"/>
+        <result property="city"          column="city"/>
+        <result property="bankCard"      column="bankCard"/>
+        <result property="occupation"    column="occupation"/>
+        <result property="companyName"   column="companyName"/>
+        <result property="maritalStatus" column="maritalStatus"/>
+        <result property="userType"      column="userType"/>
+        <result property="createTime"    column="createTime"/>
+        <result property="updateTime"    column="updateTime"/>
+        <result property="status"        column="status"/>
+    </resultMap>
+
+    <select id="getAllUserInfo" resultMap="UserResultMap">
+        SELECT *
+        FROM user
+    </select>
+
+    <select id="findByIdCards" resultMap="UserResultMap">
+        SELECT * FROM user WHERE idCard IN
+        <foreach collection="idCards" item="idCard" open="(" separator="," close=")">
+            #{idCard}
+        </foreach>
+    </select>
+
+<!--    &lt;!&ndash; 批量插入 &ndash;&gt;-->
+<!--    <insert id="createUserInfo" parameterType="java.util.List">-->
+<!--        INSERT INTO user-->
+<!--            (-->
+<!--        name, gender, idCard, phoneNumber, mobileNumber, address, nationality,-->
+<!--        country, state, city, bankCard, occupation, companyName, maritalStatus,-->
+<!--        userType, createTime, updateTime, status-->
+<!--            )-->
+<!--        VALUES-->
+<!--        <foreach collection="list" item="user" separator=",">-->
+<!--            (#{user.name, jdbcType=VARCHAR},-->
+<!--            #{user.gender, jdbcType=VARCHAR},-->
+<!--            #{user.idCard, jdbcType=VARCHAR},-->
+<!--            #{user.phoneNumber, jdbcType=VARCHAR},-->
+<!--            #{user.mobileNumber, jdbcType=VARCHAR},-->
+<!--            #{user.address, jdbcType=VARCHAR},-->
+<!--            #{user.nationality, jdbcType=VARCHAR},-->
+<!--            #{user.country, jdbcType=VARCHAR},-->
+<!--            #{user.state, jdbcType=VARCHAR},-->
+<!--            #{user.city, jdbcType=VARCHAR},-->
+<!--            #{user.bankCard, jdbcType=VARCHAR},-->
+<!--            #{user.occupation, jdbcType=VARCHAR},-->
+<!--            #{user.companyName, jdbcType=VARCHAR},-->
+<!--            #{user.maritalStatus, jdbcType=VARCHAR},-->
+<!--            #{user.userType, jdbcType=VARCHAR},-->
+<!--            #{user.createTime, jdbcType=TIMESTAMP},-->
+<!--            #{user.updateTime, jdbcType=TIMESTAMP},-->
+<!--            #{user.status, jdbcType=VARCHAR})-->
+<!--        </foreach>-->
+<!--    </insert>-->
+
+    <!-- 批量插入用户信息 -->
+    <insert id="createUserInfo" parameterType="java.util.List">
+        INSERT INTO user (
+                          id,
+        name, gender, idCard, phoneNumber, mobileNumber, address, nationality,
+        country, state, city, bankCard, occupation, companyName, maritalStatus,
+        userType, createTime, updateTime, status
+        )
+        VALUES
+        <foreach collection="list" item="user" separator=",">
+            (
+             #{user.id,jdbcType=VARCHAR},
+            COALESCE(#{user.name, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.gender, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.idCard, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.phoneNumber, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.mobileNumber, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.address, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.nationality, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.country, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.state, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.city, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.bankCard, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.occupation, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.companyName, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.maritalStatus, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.userType, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.createTime, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.updateTime, jdbcType=VARCHAR}, ''),
+            COALESCE(#{user.status, jdbcType=VARCHAR}, '')
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateUserInfo" parameterType="java.util.List">
+        UPDATE user
+        <set>
+            name = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.name}
+            </foreach> END,
+
+            gender = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.gender}
+            </foreach> END,
+
+            idCard = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.idCard}
+            </foreach> END,
+
+            phoneNumber = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.phoneNumber}
+            </foreach> END,
+
+            mobileNumber = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.mobileNumber}
+            </foreach> END,
+
+            address = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.address}
+            </foreach> END,
+
+            nationality = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.nationality}
+            </foreach> END,
+
+            country = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.country}
+            </foreach> END,
+
+            state = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.state}
+            </foreach> END,
+
+            city = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.city}
+            </foreach> END,
+
+            bankCard = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.bankCard}
+            </foreach> END,
+
+            occupation = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.occupation}
+            </foreach> END,
+
+            companyName = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.companyName}
+            </foreach> END,
+
+            maritalStatus = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.maritalStatus}
+            </foreach> END,
+
+            userType = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.userType}
+            </foreach> END,
+
+            createTime = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.createTime}
+            </foreach> END,
+
+            updateTime = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.updateTime}
+            </foreach> END,
+
+            status = CASE id
+            <foreach collection="list" item="user">
+                WHEN #{user.id} THEN #{user.status}
+            </foreach> END
+        </set>
+        WHERE id IN
+        <foreach collection="list" item="user" open="(" separator="," close=")">
+            #{user.id}
+        </foreach>
+    </update>
+
+
+
+</mapper>

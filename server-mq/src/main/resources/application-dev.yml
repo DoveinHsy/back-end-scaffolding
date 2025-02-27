@@ -1,0 +1,43 @@
+server:
+  port: 28924
+  servlet:
+    context-path: /mq
+spring:
+  application:
+    name: server-mq
+
+#eureka配置
+eureka:
+  #设置注册方式为ip注册，设置注册地址
+  instance:
+    instanceId: localhost:28924
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 4 #主动心跳时间间隔
+    lease-expiration-duration-in-seconds: 12  #超过该事件eureka没接到心跳会剔除该实例
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:28921/eureka/
+
+#
+#app:
+#  id: dsp
+#
+##apollo配置
+#apollo:
+#  cluster: mdbserver-dev
+#  meta: http://10.4.32.166:8085,http://10.4.32.167:8085
+#  autoUpdateInjectedSpringProperties: true
+#  bootstrap:
+#    enabled: true
+#    namespaces: application,configuration
+#    eagerLoad:
+#      enabled: false
+#
+##log配置
+#logging:
+#  level:
+#    com.dsp.mdb.dao.*.*: debug
+#
+##分页插件
+#pagehelper:
+#  auto-runtime-dialect: true

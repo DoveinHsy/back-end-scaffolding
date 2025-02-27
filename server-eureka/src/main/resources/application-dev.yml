@@ -1,0 +1,30 @@
+server:
+  port: 28921
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:28921
+      registerWithEureka: true
+      fetchRegistry: false
+
+# apollo配置
+app:
+  id: ysx
+apollo:
+  cluster: app-dev
+  meta: http://localhost:8080
+  prefix: apollo
+  autoUpdateInjectedSpringProperties: true
+  bootstrap:
+    enabled: true
+    namespaces: application,configuration
+    eagerLoad:
+      enabled: false
+
+#  instance:
+#     preferIpAddress: true
+#     instance-id: http://localhost:28921
+#     hostname: eureka1
+
+

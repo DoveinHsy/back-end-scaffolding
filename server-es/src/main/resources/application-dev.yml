@@ -1,0 +1,43 @@
+server:
+  port: 28923
+  servlet:
+    context-path: /es
+spring:
+  application:
+    name: server-es
+
+app:
+  id: ysx
+apollo:
+  cluster: app-dev
+  meta: http://localhost:8080
+  prefix: apollo
+  autoUpdateInjectedSpringProperties: true
+  bootstrap:
+    enabled: true
+    namespaces: application,configuration
+    eagerLoad:
+      enabled: false
+#
+#app:
+#  id: dsp
+#
+##apollo配置
+#apollo:
+#  cluster: mdbserver-dev
+#  meta: http://10.4.32.166:8085,http://10.4.32.167:8085
+#  autoUpdateInjectedSpringProperties: true
+#  bootstrap:
+#    enabled: true
+#    namespaces: application,configuration
+#    eagerLoad:
+#      enabled: false
+#
+##log配置
+#logging:
+#  level:
+#    com.dsp.mdb.dao.*.*: debug
+#
+##分页插件
+#pagehelper:
+#  auto-runtime-dialect: true

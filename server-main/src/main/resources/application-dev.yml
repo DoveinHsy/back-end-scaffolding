@@ -1,0 +1,141 @@
+# spring 配置
+server:
+  port: 28920
+  servlet:
+    context-path: /main
+spring:
+  application:
+    name: server-main
+# apollo配置
+app:
+  id: ysx
+apollo:
+  cluster: app-dev
+  meta: http://localhost:8080
+  prefix: apollo
+  autoUpdateInjectedSpringProperties: true
+  bootstrap:
+    enabled: true
+    namespaces: application,configuration
+    eagerLoad:
+      enabled: false
+
+
+    #   redis:
+#     host: 127.0.0.1
+#     port: 6379
+# #    password: 123456
+#     ssl: false
+#     database: 0
+#     timeout: 6000
+#     lettuce:
+#       pool:
+#         max-active: 16
+#         max-idle: 60
+#         min-idle: 60
+#         max-wait: 6000
+#   mongodb:
+#     host: localhost
+#     port: 27017
+#     database: xiaoxingbomei
+#
+# management:
+#   #
+#   endpoint:
+#     health:
+#       show-details: always
+#     metrics:
+#       enabled: true
+#   #
+#   endpoints:
+#     jmx:
+#       exposure:
+#         include: '*'
+#     web:
+#       exposure:
+#         # include: health,info,metrics,loggers
+#         include: '*'
+#   #
+#   health:
+#     elasticsearch:
+#       enabled: false
+#     redis:
+#       enabled: false
+#   server:
+#     servlet:
+#       context-path: /main
+
+
+
+# eureka配置
+# eureka:
+#   #设置注册方式为ip注册，设置注册地址
+#   instance:
+#     instanceId: localhost:28920
+#     preferIpAddress: true
+#     lease-renewal-interval-in-seconds: 4 #主动心跳时间间隔
+#     lease-expiration-duration-in-seconds: 12  #超过该事件eureka没接到心跳会剔除该实例
+#   client:
+#     serviceUrl:
+#       defaultZone: http://localhost:28921/eureka/
+
+
+
+
+# log配置
+# logging:
+#   config: classpath:log4j2.xml
+#   level:
+#     org.xiaoxingbomei.dao.*.*: debug
+#     org.springframework.data.mongodb.core: debug
+#
+##分页插件
+#pagehelper:
+#  auto-runtime-dialect: true
+
+# sa-token配置
+# sa-token:
+#   # token 名称（同时也是 cookie 名称）
+#   token-name: satoken
+#   # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+#   timeout: 2592000
+#   # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
+#   active-timeout: -1
+#   # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+#   is-concurrent: true
+#   # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+#   is-share: true
+#   # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+#   token-style: uuid
+#   # 是否输出操作日志
+#   is-log: true
+
+# swagger配置
+# springdoc:
+#   api-docs:
+#     #是否开启文档功能
+#     enabled: true
+#     #swagger后端请求地址
+#     path: /api-json
+#   swagger-ui:
+#     #自定义swagger前端请求路径，输入http：127.0.0.1:8080/demo 会自动重定向到swagger页面
+#     path: /swagger
+#   #包扫描路径 ,多个用逗号
+#   packages-to-scan: org.xiaoxingbomei
+#   #这里定义了两个分组，可定义多个，也可以不定义
+#   group-configs:
+#     #分组名
+#       #分组名
+#     - group: 全部服务
+#         #按路径匹配
+#       pathsToMatch: /**
+
+#    - group: auth
+#      #按路径匹配
+#      pathsToMatch: /auth/**
+
+
+
+
+      #按包路径匹配
+      # packagesToScan: com.demo.controller.user

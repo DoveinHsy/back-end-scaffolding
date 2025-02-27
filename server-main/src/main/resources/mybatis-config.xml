@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-// mybatis.org//DTD  Config 3.0//EN"
+        " http://mybatis.org/dtd/mybatis-3-config.dtd ">
+
+<!-- mybatis日志配置 -->
+<configuration>
+
+    <!-- 设置 -->
+    <settings>
+        <!-- 设置 MyBatis 使用 Log4j2 作为日志框架 -->
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+
+    <!-- 插件 -->
+    <plugins>
+        <plugin interceptor="org.xiaoxingbomei.config.mybatis.MybatisLogInterceptor" />
+<!--        <plugin interceptor="org.xiaoxingbomei.config.mybatis.MybatisInterceptor" />-->
+    </plugins>
+
+
+
+</configuration>
