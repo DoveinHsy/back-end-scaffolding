@@ -1,10 +1,10 @@
 server:
-  port: 28924
+  port: 28927
   servlet:
     context-path: /
 spring:
   application:
-    name: mq
+    name: auth
 
 #eureka配置
 eureka:

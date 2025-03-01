@@ -76,7 +76,7 @@ public class PingPongTask
 
 
     // 定时搜集并打印中间件连接状态
-    @Scheduled(fixedRate = 200000, initialDelay = 5000)
+//    @Scheduled(fixedRate = 200000, initialDelay = 5000)
     public void checkMiddleWareAlive()
     {
         log.info("\n------------------------------------------------\n\t{}{}{}{}{}{}{}{}{}{}",

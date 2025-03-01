@@ -1,5 +1,6 @@
 package org.xiaoxingbomei.config.Thread;
 
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.xiaoxingbomei.entity.DynamicLinkedBlockingQueue;
 import org.xiaoxingbomei.entity.TaskWithTimestamp;

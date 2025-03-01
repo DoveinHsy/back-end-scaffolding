@@ -19,13 +19,20 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.GeoResult;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.RedisGeoCommands;
+import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xiaoxingbomei.common.entity.ProgressBar;
-import org.xiaoxingbomei.config.Thread.DynamicThreadPool_bak;
+import org.xiaoxingbomei.config.Thread.DynamicThreadPool;
 import org.xiaoxingbomei.config.fastexcel.CommonLogUploadDataListener;
 import org.xiaoxingbomei.config.minio.MinioConfig;
 import org.xiaoxingbomei.entity.DynamicLinkedBlockingQueue;
@@ -92,7 +99,7 @@ public class TechServiceImpl implements TechService
 //    private ElasticsearchClient elasticsearchClient;
 
     @Autowired
-    private DynamicThreadPool_bak threadPool;
+    private DynamicThreadPool threadPool;
 
 
 
@@ -302,7 +309,7 @@ public class TechServiceImpl implements TechService
             return GlobalEntity.error(resultMap,"手动创建动态线程池成功,线程池已存在");
         }
 
-        threadPool = new DynamicThreadPool_bak(corePoolSize, maximumPoolSize, 60L, TimeUnit.SECONDS, new DynamicLinkedBlockingQueue<>(queueCapacity));
+        threadPool = new DynamicThreadPool(corePoolSize, maximumPoolSize, 60L, TimeUnit.SECONDS, new DynamicLinkedBlockingQueue<>(queueCapacity));
 
         threadPool.printThreadPoolStatus();
         String threadPoolStatus = threadPool.getThreadPoolStatus();

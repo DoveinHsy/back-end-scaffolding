@@ -33,7 +33,7 @@ public class ThreadPoolConfig
     private Config apolloConfig;
 
     // 动态线程池实例
-    private DynamicThreadPool_bak dynamicThreadPool;
+    private DynamicThreadPool dynamicThreadPool;
 
     // 在初始化时获取 Apollo 配置，并监听配置变更
     public ThreadPoolConfig()
@@ -88,9 +88,9 @@ public class ThreadPoolConfig
     }
 
     // 创建线程池实例
-    private DynamicThreadPool_bak createThreadPool()
+    private DynamicThreadPool createThreadPool()
     {
-        return new DynamicThreadPool_bak
+        return new DynamicThreadPool
                 (
                     Integer.parseInt(corePoolSize),     // 核心线程数
                     Integer.parseInt(maximumPoolSize),  // 最大线程数
@@ -102,7 +102,7 @@ public class ThreadPoolConfig
 
     // 创建并提供线程池 Bean
     @Bean
-    public DynamicThreadPool_bak dynamicThreadPool()
+    public DynamicThreadPool dynamicThreadPool()
     {
         return dynamicThreadPool;
     }

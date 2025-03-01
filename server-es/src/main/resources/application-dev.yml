@@ -1,15 +1,15 @@
 server:
   port: 28923
   servlet:
-    context-path: /es
+    context-path: /
 spring:
   application:
-    name: server-es
+    name: es
 
 app:
   id: ysx
 apollo:
-  cluster: app-dev
+  cluster: es-dev
   meta: http://localhost:8080
   prefix: apollo
   autoUpdateInjectedSpringProperties: true

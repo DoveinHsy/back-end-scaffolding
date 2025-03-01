@@ -5,7 +5,7 @@ server:
     context-path: /main
 spring:
   application:
-    name: server-main
+    name: main
 
 # apollo配置
 app:

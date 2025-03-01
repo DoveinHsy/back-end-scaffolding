@@ -2,10 +2,10 @@
 server:
   port: 28920
   servlet:
-    context-path: /main
+    context-path: /
 spring:
   application:
-    name: server-main
+    name: main
 # apollo配置
 app:
   id: ysx

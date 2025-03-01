@@ -21,7 +21,8 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.multipart.MultipartFile;
 import org.xiaoxingbomei.aspect.ControllerLogAspectByPath;
 import org.xiaoxingbomei.common.entity.GlobalEntity;
-import org.xiaoxingbomei.config.Thread.DynamicThreadPool_bak;
+import org.xiaoxingbomei.config.Thread.DynamicThreadPool;
+import org.xiaoxingbomei.config.mybatis.MybatisLogInterceptor;
 import org.xiaoxingbomei.dao.localhost.UserMapper;
 import org.xiaoxingbomei.entity.GlobalRequestContext;
 import org.xiaoxingbomei.service.ServerEsFeignClient;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService
     RestHighLevelClient elasticsearchClient;
 
     @Autowired
-    DynamicThreadPool_bak dynamicThreadPool;
+    DynamicThreadPool dynamicThreadPool;
 
     private String localDictionaryPath = "D:\\Environment\\elasticsearch-7.10.2\\plugins\\ik\\config\\custom\\mydict.dic";
 

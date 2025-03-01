@@ -3,7 +3,7 @@ package org.xiaoxingbomei.task;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.xiaoxingbomei.config.Thread.DynamicThreadPool_bak;
+import org.xiaoxingbomei.config.Thread.DynamicThreadPool;
 import org.xiaoxingbomei.entity.DynamicLinkedBlockingQueue;
 import org.xiaoxingbomei.entity.ThreadPoolMonitor;
 
@@ -15,9 +15,9 @@ import org.xiaoxingbomei.entity.ThreadPoolMonitor;
 public class ThreadPoolMonitorTask
 {
 
-    private final DynamicThreadPool_bak dynamicThreadPool;
+    private final DynamicThreadPool dynamicThreadPool;
 
-    public ThreadPoolMonitorTask(DynamicThreadPool_bak dynamicThreadPool)
+    public ThreadPoolMonitorTask(DynamicThreadPool dynamicThreadPool)
     {
         this.dynamicThreadPool = dynamicThreadPool;
     }

@@ -1,10 +1,10 @@
 server:
   port: 28926
   servlet:
-    context-path: /sql
+    context-path: /
 spring:
   application:
-    name: server-sql
+    name: sql
 
 #eureka配置
 eureka:

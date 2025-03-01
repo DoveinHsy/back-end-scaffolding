@@ -1,11 +1,23 @@
 server:
   port: 28922
   servlet:
-    context-path: /api
+    context-path: /
 spring:
   application:
-    name: server-api
-
+    name: api
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#      routes:
+#        - id: server-main-route  # 路由的唯一ID
+#          uri: lb://main  # 使用服务名称
+#          predicates:
+#            - Path=/api/main/**  # 匹配路径
+#          filters:
+#            - StripPrefix=2  # 去掉前缀（/main）
 #eureka配置
 eureka:
   #设置注册方式为ip注册，设置注册地址
@@ -18,6 +30,34 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:28921/eureka/
 
+
+
+# apollo配置
+app:
+  id: ysx
+apollo:
+  cluster: api-dev
+  meta: http://localhost:8080
+  prefix: apollo
+  autoUpdateInjectedSpringProperties: true
+  bootstrap:
+    enabled: true
+    namespaces: application,configuration
+    eagerLoad:
+      enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, gateway  # 暴露 gateway 端点
+  endpoint:
+    gateway:
+      enabled: true
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: DEBUG
+#    com.netflix.discovery: DEBUG
 #
 #app:
 #  id: dsp
