@@ -8,6 +8,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * 异步任务  自定义线程池
+ */
 public class AsyncThreadPool
 {
     // 用于落库操作的线程池

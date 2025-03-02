@@ -7,6 +7,9 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
+/**
+ * Spring 定时任务 线程池
+ */
 @Configuration
 @EnableScheduling
 public class SpringSchedulePool

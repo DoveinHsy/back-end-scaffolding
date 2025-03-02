@@ -9,6 +9,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * 数据库操作 自定义线程池
+ */
 @Component
 public class DbThreadPool
 {
