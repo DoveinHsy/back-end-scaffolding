@@ -9,7 +9,7 @@ spring:
 app:
   id: ysx
 apollo:
-  cluster: es-dev
+  cluster: app-dev
   meta: http://localhost:8080
   prefix: apollo
   autoUpdateInjectedSpringProperties: true

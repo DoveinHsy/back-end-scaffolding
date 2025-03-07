@@ -21,6 +21,18 @@ apollo:
       enabled: false
 
 
+# eureka配置
+eureka:
+  #设置注册方式为ip注册，设置注册地址
+  instance:
+    instanceId: localhost:28920
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 4 #主动心跳时间间隔
+    lease-expiration-duration-in-seconds: 12  #超过该事件eureka没接到心跳会剔除该实例
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:28921/eureka/
+
     #   redis:
 #     host: 127.0.0.1
 #     port: 6379
@@ -67,17 +79,7 @@ apollo:
 
 
 
-# eureka配置
-# eureka:
-#   #设置注册方式为ip注册，设置注册地址
-#   instance:
-#     instanceId: localhost:28920
-#     preferIpAddress: true
-#     lease-renewal-interval-in-seconds: 4 #主动心跳时间间隔
-#     lease-expiration-duration-in-seconds: 12  #超过该事件eureka没接到心跳会剔除该实例
-#   client:
-#     serviceUrl:
-#       defaultZone: http://localhost:28921/eureka/
+
 
 
 

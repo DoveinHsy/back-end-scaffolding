@@ -8,6 +8,7 @@ import lombok.Getter;
 
 public class ProgressBar
 {
+
     private final int total;
     private final int width;
     private int current;

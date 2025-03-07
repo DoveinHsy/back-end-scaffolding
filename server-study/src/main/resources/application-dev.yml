@@ -19,18 +19,18 @@ eureka:
       defaultZone: http://localhost:28921/eureka/
 
 # apollo配置
-#app:
-#  id: ysx
-#apollo:
-#  cluster: app-dev
-#  meta: http://10.247.17.134:8080
-#  prefix: apollo
-#  autoUpdateInjectedSpringProperties: true
-#  bootstrap:
-#    enabled: true
-#    namespaces: application,configuration
-#    eagerLoad:
-#      enabled: false
+app:
+  id: ysx
+apollo:
+  cluster: app-dev
+  meta: http://10.247.17.134:8080
+  prefix: apollo
+  autoUpdateInjectedSpringProperties: true
+  bootstrap:
+    enabled: true
+    namespaces: application,configuration
+    eagerLoad:
+      enabled: false
 
 #
 #app:

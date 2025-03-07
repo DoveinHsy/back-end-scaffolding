@@ -1,7 +1,7 @@
 package org.xiaoxingbomei.common.utils;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 

@@ -10,7 +10,8 @@ public class MyBanner implements Banner
 {
 
     @Override
-    public void printBanner(Environment environment, Class<?> sourceClass, PrintStream out) {
+    public void printBanner(Environment environment, Class<?> sourceClass, PrintStream out)
+    {
         System.out.println("██     ██    ██     ██   ██ ██  █████  ███    ██  ██████      ██   ██ ███████     \n" +
                 "██     ██    ██      ██ ██  ██ ██   ██ ████   ██ ██           ██   ██ ██          \n" +
                 "██     ██    ██       ███   ██ ███████ ██ ██  ██ ██   ███     ███████ █████       \n" +

@@ -67,11 +67,6 @@ public class JavaServiceImpl
 
 
     /**
-     * 反射
-     */
-
-
-    /**
      * 浅拷贝 - Cloneable
      */
     @Test
@@ -127,8 +122,125 @@ public class JavaServiceImpl
      */
 
     /**
-     * 深拷贝
+     * 深拷贝 -
      */
+
+
+    /**
+     * ava 并发编程体系大纲（扁平化）
+     * 1. 线程基础
+     * 1.1 线程的创建方式
+     * 继承 Thread 类
+     * 实现 Runnable 接口
+     * 实现 Callable 接口 + Future
+     * 线程池方式创建
+     * 1.2 线程的生命周期与状态转换
+     * 1.3 线程的基本方法 (start()、join()、yield()、sleep()、interrupt())
+     * 2. 线程同步
+     * 2.1 synchronized 关键字
+     * 2.2 volatile 关键字
+     * 2.3 Lock 体系 (ReentrantLock, ReentrantReadWriteLock)
+     * 2.4 ThreadLocal 线程变量
+     * 2.5 CAS（Compare-And-Swap）和 Atomic 类
+     * 2.6 ABA 问题与 AtomicStampedReference
+     * 3. 线程间通信
+     * 3.1 wait()、notify()、notifyAll()
+     * 3.2 Condition 结合 Lock 使用
+     * 3.3 生产者-消费者模型（阻塞队列）
+     * 3.4 Thread.join() 和 CountDownLatch
+     * 3.5 CyclicBarrier 和 Semaphore
+     * 3.6 Exchanger 数据交换
+     * 4. 线程池
+     * 4.1 Executor 框架
+     * 4.2 ThreadPoolExecutor 详细参数解析
+     * 4.3 ScheduledThreadPoolExecutor
+     * 4.4 线程池的拒绝策略
+     * 4.5 线程池的动态调整（核心线程数、最大线程数）
+     * 4.6 ForkJoinPool 详解
+     * 5. Future 机制
+     * 5.1 Future 和 FutureTask
+     * 5.2 CompletableFuture 详解
+     * 异步任务链
+     * 异常处理
+     * 组合多个任务
+     * 5.3 CompletableFuture 和 Executor 结合使用
+     * 6. 并发工具类
+     * 6.1 BlockingQueue（ArrayBlockingQueue, LinkedBlockingQueue, PriorityBlockingQueue）
+     * 6.2 ConcurrentHashMap 详解
+     * 6.3 CopyOnWriteArrayList 和 CopyOnWriteArraySet
+     * 6.4 ConcurrentLinkedQueue 和 LinkedBlockingQueue
+     * 6.5 StampedLock
+     * 7. JUC (java.util.concurrent) 详解
+     * 7.1 LockSupport 详解
+     * 7.2 AQS（AbstractQueuedSynchronizer）原理解析
+     * 7.3 Unsafe 类的并发应用
+     * 7.4 LongAdder 和 LongAccumulator
+     * 8. 并发设计模式
+     * 8.1 单例模式的并发安全实现
+     * 8.2 生产者-消费者模式
+     * 8.3 读写锁模式
+     * 8.4 线程池管理模式
+     * 8.5 Actor 并发模型
+     * 8.6 Disruptor 高性能队列模型
+     * 9. Java 内存模型（JMM）
+     * 9.1 可见性、原子性、有序性
+     * 9.2 Happens-Before 规则
+     * 9.3 指令重排序
+     * 9.4 volatile 的实现原理
+     * 9.5 synchronized 的内存语义
+     * 9.6 CAS 原理与底层实现
+     * 10. 高级并发优化
+     * 10.1 无锁编程与 Lock-Free 数据结构
+     * 10.2 伪共享问题（False Sharing）
+     * 10.3 线程上下文切换优化
+     * 10.4 ForkJoinPool 的最佳实践
+     * 10.5 Disruptor 高性能队列优化
+     * 10.6 Netty 线程模型与 NIO
+     */
+
+    /**
+     * 创建线程-继承Thread类
+     * 原理：
+     */
+
+    @Test
+    public void createThreadByThread()
+    {
+
+    }
+    class MyThread extends Thread
+    {
+        @Override
+        public void run()
+        {
+            log.info("线程执行"+Thread.currentThread().getName());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
