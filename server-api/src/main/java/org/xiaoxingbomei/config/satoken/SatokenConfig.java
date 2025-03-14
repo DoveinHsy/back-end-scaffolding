@@ -1,6 +1,8 @@
 package org.xiaoxingbomei.config.satoken;
 
 import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotPermissionException;
+import cn.dev33.satoken.exception.NotRoleException;
 import cn.dev33.satoken.exception.SaTokenException;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
@@ -25,6 +27,8 @@ public class SatokenConfig
     @Autowired
     private StpInterfaceImpl stpInterface;
 
+    // ======================================================================================
+
     /**
      * 注册 sa-token 全局过滤器（网关统一鉴权）
      */
@@ -35,33 +39,51 @@ public class SatokenConfig
                 // 拦截地址
                 .addInclude("/**")    /* 拦截全部path */
                 // 开放地址
-                .addExclude("/favicon.ico","/auth/login")
+                .addExclude("/favicon.ico")
                 // 鉴权方法：每次访问进入
                 .setAuth(obj ->
                 {
-                    String token = StpUtil.getTokenValue();
-                    log.info("当前请求的 Token: {}", token);
-                    if (token == null || !StpUtil.isLogin())
-                    {
-                        throw new NotLoginException("Token无效", "login", token);
-                    }
+                    // 登录校验 -- 拦截所有路由，并排除/auth 用于开放登录
+                    SaRouter.match("/**").notMatch("/auth/**").check(r -> StpUtil.checkLogin()).check(r->StpUtil.checkRole("admin"));
+                    List<String> roleList = StpUtil.getRoleList();
+                    log.info("roleList: {}", roleList);
 
-                    // 登录校验 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
-                    SaRouter.match("/**", "/auth/login", r -> StpUtil.checkLogin());
+                    // 权限认证 -- 不同模块，校验不同的权限
+//                    SaRouter.match("/main/**", r -> StpUtil.checkPermission("main"));
+//                    SaRouter.match("/es/**", r -> StpUtil.checkPermission("es"));
+//                    SaRouter.match("/sql/**", r -> StpUtil.checkPermission("sql"));
+//                    SaRouter.match("/mq/**", r -> StpUtil.checkPermission("mq"));
+//                    SaRouter.match("/study/**", r -> StpUtil.checkPermission("study"));
 
-                    //
-                    SaRouter.match("/auth/**", r -> StpUtil.checkPermission("auth"));
-
-                    // 更多匹配 ...  */
 
                 })
                 // 异常处理方法：每次setAuth函数出现异常时进入
-                .setError(e ->
-                {
-                    log.info("SaReactorFilter error", e);
-                    return SaResult.error(e.getMessage());
-                })
-                ;
+                .setError(this::getSaResult);
+    }
+
+    // 包装权限异常响应
+    private SaResult getSaResult(Throwable throwable)
+    {
+        if(throwable instanceof NotLoginException)
+        {
+            log.error("请先登录");
+            return SaResult.error("请先登录");
+        }
+        else if (throwable instanceof NotRoleException)
+        {
+            log.error("您无权限进行此操作");
+            return SaResult.error("您无权限进行此操作");
+        }
+        else if (throwable instanceof NotPermissionException)
+        {
+            log.error("您无权限进行此操作");
+            return SaResult.error("您无权限进行此操作");
+        }
+        else
+        {
+            log.error("权限受限{}",throwable.getMessage());
+            return SaResult.error("权限受限");
+        }
     }
 
 }

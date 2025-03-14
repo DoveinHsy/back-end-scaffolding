@@ -1,13 +1,11 @@
 package org.xiaoxingbomei.config.satoken;
 
 import cn.dev33.satoken.stp.StpInterface;
-import cn.dev33.satoken.stp.StpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.xiaoxingbomei.reactiveFeign.AuthClient;
-import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
@@ -49,15 +47,15 @@ public class StpInterfaceImpl implements StpInterface
         }
 
         // 异步更新缓存
-        authClient.getPermissions(loginId.toString())
-                .doOnNext(response ->
-                {
-                    log.info("Fetched permissions: {}", response.getData());
-                    redisTemplate.opsForValue().set(cacheKey, response.getData(), 3600, TimeUnit.SECONDS);
-                })
-                .doOnError(e -> log.error("Failed to fetch permissions: {}", e.getMessage()))
-                .subscribeOn(scheduler)
-                .subscribe();
+//        authClient.getPermissionList(loginId.toString())
+//                .doOnNext(response ->
+//                {
+//                    log.info("Fetched permissions: {}", response.getData());
+//                    redisTemplate.opsForValue().set(cacheKey, response.getData(), 3600, TimeUnit.SECONDS);
+//                })
+//                .doOnError(e -> log.error("Failed to fetch permissions: {}", e.getMessage()))
+//                .subscribeOn(scheduler)
+//                .subscribe();
 
         // 因为在auth的登录处 已经做了缓存预热，理论不会走到这里
         log.info("No cached permissions, returning empty list");
@@ -111,7 +109,10 @@ public class StpInterfaceImpl implements StpInterface
     @Override
     public List<String> getRoleList(Object loginId, String loginType)
     {
-        return Collections.emptyList();
+        log.info("getRoleList start for loginId: {}", loginId);
+        List<String> roleList = authClient.getRoleList(loginId.toString());
+        log.info("get rpc roleList: {}", roleList);
+        return roleList;
     }
 
 }

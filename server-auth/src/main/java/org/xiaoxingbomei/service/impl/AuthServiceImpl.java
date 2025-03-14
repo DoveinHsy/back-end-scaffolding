@@ -3,17 +3,24 @@ package org.xiaoxingbomei.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
+import com.mysql.cj.CacheAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.xiaoxingbomei.common.Enum.GlobalCodeEnum;
 import org.xiaoxingbomei.common.entity.response.GlobalResponse;
 import org.xiaoxingbomei.common.utils.Request_Utils;
+import org.xiaoxingbomei.dao.localhost.AuthMapper;
+import org.xiaoxingbomei.entity.SysRole;
 import org.xiaoxingbomei.service.AuthService;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.xiaoxingbomei.common.CacheConstant.CACHE_KEY_SEPARATOR;
 
 /**
  *
@@ -22,6 +29,21 @@ import java.util.List;
 @Slf4j
 public class AuthServiceImpl implements AuthService
 {
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private AuthMapper authMapper;
+
+    // ========================================================================
+
+
+    @Override
+    public GlobalResponse register(String paramString)
+    {
+        return null;
+    }
+
     @Override
     public GlobalResponse login(String paramString)
     {
@@ -119,17 +141,93 @@ public class AuthServiceImpl implements AuthService
     }
 
 
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public GlobalResponse createRole(String paramString)
+    {
+        // 1、获取前端参数
+        String roleKey     = Request_Utils.getParam(paramString, "roleKey");
+        String roleName    = Request_Utils.getParam(paramString, "roleName");
+        String description = Request_Utils.getParam(paramString, "description");
+        String permissions = Request_Utils.getParam(paramString, "permissions");
+
+        // 2、创建角色
+        SysRole sysRole = new SysRole();
+        sysRole.setRoleKey(roleKey);
+        sysRole.setRoleName(roleName);
+        sysRole.setDescription(description);
+
+        authMapper.insertRole(sysRole);
+
+        // 3、关联权限
+        if(StringUtils.isNotEmpty(permissions))
+        {
+            List<String> permissionList = Arrays.asList(permissions.split(",", -1));
+            // 去除多余空格(可选)
+            permissionList = permissionList.stream().map(String::trim).collect(Collectors.toList());
+            log.info("当前角色需要关联的权限为+{}",permissionList);
+            authMapper.batchInsertRolePermissions(roleKey,permissionList);
+        }
+
+        // 4、清理缓存（可选）
+
+        // 5、封装结果
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("roleKey", roleKey);
+        resultMap.put("roleName",roleName);
+        resultMap.put("permissions",permissions);
+
+        return GlobalResponse.success(resultMap,"新增角色成功");
+    }
+
+    @Override
+    public List<String> getRoleList(String loginId)
+    {
+        return StpUtil.getRoleList(loginId);
+    }
+
+    @Override
+    public List<String> getRoleListByStore(String paramString)
+    {
+        // 1、获取前端参数
+        String loginId = Request_Utils.getParam(paramString, "loginId");
+
+        // 2、通过缓存获取角色列表
+
+        // 3、通过数据库获取角色列表
+        List<SysRole> sysRoles = authMapper.selectRolesByUserId(loginId);
+        log.info("角色列表是啥："+sysRoles.toString());
+        List<String> rolekeyList = sysRoles.stream().map(SysRole::getRoleKey).collect(Collectors.toList());
+
+        // 4、更新缓存（可选）
+
+
+        // 5、封装返回
+        return rolekeyList;
+    }
+
+
+
+    @Override
+    public GlobalResponse assignUserRoles(String paramString)
+    {
+        return null;
+    }
+
+
     @Override
     public GlobalResponse getPermissionList(String loginId)
     {
+        // 1、通过缓存获取权限列表
+
+        // 2、通过数据库获取权限列表
+
+        // 3、存入缓存
+
+        // 4、封装返回
         List<String> permissionList = StpUtil.getPermissionList(loginId);
         return GlobalResponse.success(permissionList,loginId);
     }
 
-    @Override
-    public GlobalResponse getRoleList(String loginId)
-    {
-        List<String> roleList = StpUtil.getRoleList(loginId);
-        return GlobalResponse.success(roleList,loginId);
-    }
 }

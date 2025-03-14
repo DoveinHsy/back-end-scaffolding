@@ -5,14 +5,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.xiaoxingbomei.common.config.springboot.MyBanner;
 import reactivefeign.spring.config.EnableReactiveFeignClients;
-
 
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @EnableEurekaClient
 @EnableDiscoveryClient
 @EnableReactiveFeignClients(basePackages = "org.xiaoxingbomei.reactiveFeign")
+@EnableFeignClients
 public class Server_Api
 {
     public static void main(String[] args)

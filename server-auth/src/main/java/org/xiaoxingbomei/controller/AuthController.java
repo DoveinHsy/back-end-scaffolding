@@ -1,13 +1,18 @@
 package org.xiaoxingbomei.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.xiaoxingbomei.common.entity.response.GlobalResponse;
 import org.xiaoxingbomei.constant.ApiConstant;
 import org.xiaoxingbomei.service.AuthService;
 
+import java.util.HashMap;
+import java.util.List;
+
 @RestController
+@Slf4j
 public class AuthController
 {
     @Autowired
@@ -16,6 +21,7 @@ public class AuthController
     // =========================================================================================
 
     /**
+     * sa-token controller 控制
      * 登录：登录统一入口
      *    根据登录类型路由不同的登录方式
      *  - 密码登录
@@ -70,6 +76,7 @@ public class AuthController
         GlobalResponse ret = authService.getLoginId(paramString);
         return ret;
     }
+
     @Operation(summary = "获取权限集合",description = "集成sa-token,获取登录的用户的权限集合")
     @RequestMapping(value = ApiConstant.Auth.getPermissionList, method = RequestMethod.POST)
     public GlobalResponse getPermissionList(@RequestParam String loginId)
@@ -79,14 +86,46 @@ public class AuthController
     }
 
 
-    @Operation(summary = "获取角色集合",description = "集成sa-token,获取登录的用户的角色集合")
-    @RequestMapping(value = ApiConstant.Auth.getRoleList, method = RequestMethod.POST)
-    public GlobalResponse getRoleList(@RequestParam String loginId)
+    @Operation(summary = "创建角色",description = "创建角色并关联对应的权限")
+    @RequestMapping(value = ApiConstant.Auth.createRole, method = RequestMethod.POST)
+    public GlobalResponse createRole(@RequestParam String paramString)
     {
-        GlobalResponse ret = authService.getRoleList(loginId);
+        GlobalResponse ret = authService.createRole(paramString);
         return ret;
     }
 
+    @Operation(summary = "获取角色集合",description = "集成sa-token,获取登录的用户的角色集合")
+    @RequestMapping(value = ApiConstant.Auth.getRoleList, method = RequestMethod.POST)
+    public List<String> getRoleList(@RequestParam String loginId)
+    {
+        log.info("应该是别的地方rpc这里");
+        List<String> roleList = authService.getRoleList(loginId);
+
+        return roleList;
+    }
+
+    @Operation(summary = "获取角色集合",description = "集成sa-token,获取登录的用户的角色集合")
+    @RequestMapping(value = ApiConstant.Auth.getRoleListByStore, method = RequestMethod.POST)
+    public GlobalResponse getRoleListByStore(@RequestBody String loginId)
+    {
+        List<String> roleList = authService.getRoleListByStore(loginId);
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("loginId",loginId);
+        resultMap.put("roleList",roleList);
+        return GlobalResponse.success(resultMap,"获取登录用户的角色列表成功");
+    }
+
+
+//    /**
+//     * RBAC-
+//     */
+//    @Operation(summary = "RBAC-",description = "")
+//    @RequestMapping(value = ApiConstant.Auth.Xxx,method = RequestMethod.POST)
+//    public GlobalResponse xxx(@RequestMapping String paramString)
+//    {
+//        GlobalResponse response = authService.xxx();
+//        return response;
+//    }
 
 
 }

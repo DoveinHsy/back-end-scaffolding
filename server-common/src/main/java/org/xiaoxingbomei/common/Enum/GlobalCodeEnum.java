@@ -16,6 +16,12 @@ public enum GlobalCodeEnum
     AUTH_SUCCESS("2001","认证成功"),
     AUTH_ERROR("2002","认证失败"),
 
+    USER_STATUS_IS_NOT_ACTIVE("USER_STATUS_IS_NOT_ACTIVE", "用户状态不可用"),
+    VERIFICATION_CODE_WRONG("VERIFICATION_CODE_WRONG", "验证码错误"),
+    USER_QUERY_FAILED("USER_QUERY_FAILED", "用户信息查询失败"),
+    USER_NOT_LOGIN("USER_NOT_LOGIN", "用户未登录"),
+    USER_NOT_EXIST("USER_NOT_EXIST", "用户不存在"),
+
 
     // 用户-3
     USER_ACCESS_EXCEED("3001","访问次数超限"),
