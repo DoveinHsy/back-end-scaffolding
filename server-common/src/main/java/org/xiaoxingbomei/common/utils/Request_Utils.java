@@ -31,7 +31,7 @@ public class Request_Utils
     }
 
     //
-    public static Map getParamMap(String paramJson)
+    private static Map getParamMap(String paramJson)
     {
         if(StringUtils.isEmpty(paramJson))
         {

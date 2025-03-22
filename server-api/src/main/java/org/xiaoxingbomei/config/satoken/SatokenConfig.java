@@ -44,17 +44,13 @@ public class SatokenConfig
                 .setAuth(obj ->
                 {
                     // 登录校验 -- 拦截所有路由，并排除/auth 用于开放登录
-                    SaRouter.match("/**").notMatch("/auth/**").check(r -> StpUtil.checkLogin()).check(r->StpUtil.checkRole("admin"));
-                    List<String> roleList = StpUtil.getRoleList();
-                    log.info("roleList: {}", roleList);
+                    SaRouter.match("/**").notMatch("/auth/**").check(r -> StpUtil.checkLogin());
+
+                    // 角色认证 -- 不同模块，校验不同的角色
+                    SaRouter.match("/main/**", r -> StpUtil.checkRoleAnd("admin"));
 
                     // 权限认证 -- 不同模块，校验不同的权限
-//                    SaRouter.match("/main/**", r -> StpUtil.checkPermission("main"));
-//                    SaRouter.match("/es/**", r -> StpUtil.checkPermission("es"));
-//                    SaRouter.match("/sql/**", r -> StpUtil.checkPermission("sql"));
-//                    SaRouter.match("/mq/**", r -> StpUtil.checkPermission("mq"));
-//                    SaRouter.match("/study/**", r -> StpUtil.checkPermission("study"));
-
+                    SaRouter.match("/xxx/**", r -> StpUtil.checkPermission("xxx"));
 
                 })
                 // 异常处理方法：每次setAuth函数出现异常时进入
@@ -71,8 +67,8 @@ public class SatokenConfig
         }
         else if (throwable instanceof NotRoleException)
         {
-            log.error("您无权限进行此操作");
-            return SaResult.error("您无权限进行此操作");
+            log.error("您无角色进行此操作");
+            return SaResult.error("您无角色进行此操作");
         }
         else if (throwable instanceof NotPermissionException)
         {

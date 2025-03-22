@@ -202,7 +202,6 @@ public class JavaServiceImpl
      * 创建线程-继承Thread类
      * 原理：
      */
-
     @Test
     public void createThreadByThread()
     {

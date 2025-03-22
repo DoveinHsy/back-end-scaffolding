@@ -77,55 +77,73 @@ public class AuthController
         return ret;
     }
 
-    @Operation(summary = "获取权限集合",description = "集成sa-token,获取登录的用户的权限集合")
-    @RequestMapping(value = ApiConstant.Auth.getPermissionList, method = RequestMethod.POST)
-    public GlobalResponse getPermissionList(@RequestParam String loginId)
-    {
-        GlobalResponse ret = authService.getPermissionList(loginId);
-        return ret;
-    }
 
-
-    @Operation(summary = "创建角色",description = "创建角色并关联对应的权限")
+    @Operation(summary = "角色-创建角色",description = "创建角色并关联对应的权限")
     @RequestMapping(value = ApiConstant.Auth.createRole, method = RequestMethod.POST)
-    public GlobalResponse createRole(@RequestParam String paramString)
+    public GlobalResponse createRole(@RequestBody String paramString)
     {
         GlobalResponse ret = authService.createRole(paramString);
         return ret;
     }
 
-    @Operation(summary = "获取角色集合",description = "集成sa-token,获取登录的用户的角色集合")
-    @RequestMapping(value = ApiConstant.Auth.getRoleList, method = RequestMethod.POST)
-    public List<String> getRoleList(@RequestParam String loginId)
+    @Operation(summary = "角色-获取角色集合",description = "获取全部的角色列表")
+    @RequestMapping(value = ApiConstant.Auth.getRole, method = RequestMethod.POST)
+    public GlobalResponse getRole(@RequestBody String paramString)
     {
-        log.info("应该是别的地方rpc这里");
-        List<String> roleList = authService.getRoleList(loginId);
-
-        return roleList;
+        GlobalResponse ret = authService.getRole(paramString);
+        return ret;
     }
 
-    @Operation(summary = "获取角色集合",description = "集成sa-token,获取登录的用户的角色集合")
-    @RequestMapping(value = ApiConstant.Auth.getRoleListByStore, method = RequestMethod.POST)
-    public GlobalResponse getRoleListByStore(@RequestBody String loginId)
+    @Operation(summary = "角色-授予用户角色",description = "集成sa-token,授予用户角色")
+    @RequestMapping(value = ApiConstant.Auth.assignUserRoles, method = RequestMethod.POST)
+    public GlobalResponse assignUserRoles(@RequestBody String paramString)
     {
-        List<String> roleList = authService.getRoleListByStore(loginId);
-        HashMap<String, Object> resultMap = new HashMap<>();
-        resultMap.put("loginId",loginId);
-        resultMap.put("roleList",roleList);
-        return GlobalResponse.success(resultMap,"获取登录用户的角色列表成功");
+        GlobalResponse response = authService.assignUserRoles(paramString);
+        return response;
     }
 
 
-//    /**
-//     * RBAC-
-//     */
-//    @Operation(summary = "RBAC-",description = "")
-//    @RequestMapping(value = ApiConstant.Auth.Xxx,method = RequestMethod.POST)
-//    public GlobalResponse xxx(@RequestMapping String paramString)
-//    {
-//        GlobalResponse response = authService.xxx();
-//        return response;
-//    }
+    @Operation(summary = "权限-",description = "XXX")
+    @RequestMapping(value = ApiConstant.Auth.createPermission, method = RequestMethod.POST)
+    public GlobalResponse createPermission(@RequestBody String loginId)
+    {
+        GlobalResponse ret = authService.createPermission(loginId);
+        return ret;
+    }
+
+    @Operation(summary = "权限-",description = "XXX")
+    @RequestMapping(value = ApiConstant.Auth.getAllPermission, method = RequestMethod.POST)
+    public GlobalResponse getAllPermission(@RequestBody String loginId)
+    {
+        GlobalResponse ret = authService.getAllPermission(loginId);
+        return ret;
+    }
+
+    @Operation(summary = "权限-",description = "XXX")
+    @RequestMapping(value = ApiConstant.Auth.assignRolePermissions, method = RequestMethod.POST)
+    public GlobalResponse assignRolePermissions(@RequestBody String loginId)
+    {
+        GlobalResponse ret = authService.assignRolePermissions(loginId);
+        return ret;
+    }
+
+    @Operation(summary = "权限-",description = "XXX")
+    @RequestMapping(value = ApiConstant.Auth.getRolePermissions, method = RequestMethod.POST)
+    public GlobalResponse getRolePermissions(@RequestBody String loginId)
+    {
+        GlobalResponse ret = authService.getRolePermissions(loginId);
+        return ret;
+    }
+
+    @Operation(summary = "权限-",description = "XXX")
+    @RequestMapping(value = ApiConstant.Auth.getUserPermissions, method = RequestMethod.POST)
+    public GlobalResponse getUserPermissions(@RequestBody String loginId)
+    {
+        GlobalResponse ret = authService.getUserPermissions(loginId);
+        return ret;
+    }
+
+
 
 
 }

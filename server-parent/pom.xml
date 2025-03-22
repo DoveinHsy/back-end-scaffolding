@@ -532,13 +532,26 @@
             <artifactId>fastexcel</artifactId>
             <version>${fastexcel.version}</version>
         </dependency>
+
+        <!-- easy rules -->
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules-core</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules-mvel</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
+
 
 
 
     <build>
 
-        <!-- 插件  -->
+        <!-- 插件 -->
         <plugins>
             <!--  用于配置构建过程中需要使用的插件，这里用于将springboot应用打包成可执行的jar    -->
             <plugin>

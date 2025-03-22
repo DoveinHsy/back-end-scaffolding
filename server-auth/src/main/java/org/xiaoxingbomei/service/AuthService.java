@@ -16,12 +16,20 @@ public interface AuthService
     GlobalResponse getSaTokenInfo(String paramString); // 通过sa-token
     GlobalResponse getLoginId    (String paramString); // 通过sa-token
 
+    GlobalResponse createRole(String paramString);   // 创建角色
+    GlobalResponse getRole   (String paramString);   // 查询角色（根据用户查或者查询全部）
+    GlobalResponse updateRole(String paramString);   // 修改角色
+    GlobalResponse deleteRole(String paramString);   // 删除角色
+    GlobalResponse assignUserRoles(String paramString);// 给用户授予角色
 
-    GlobalResponse createRole       (String paramString);   // 创建角色
-    List<String> getRoleList      (String loginId);  // 获取用户的所有角色
-    List<String> getRoleListByStore      (String loginId);  // 获取用户的所有角色
-    GlobalResponse getPermissionList(String loginId);  // 获取用户的所有权限
+    GlobalResponse createPermission     (String paramString); //
+    GlobalResponse getAllPermission     (String paramString); //
+    GlobalResponse assignRolePermissions(String paramString); //
+    GlobalResponse getRolePermissions   (String paramString); //
+    GlobalResponse getUserPermissions   (String paramString); //
 
-    GlobalResponse assignUserRoles(String paramString); // 给用户授予角色
+
+
+
 
 }

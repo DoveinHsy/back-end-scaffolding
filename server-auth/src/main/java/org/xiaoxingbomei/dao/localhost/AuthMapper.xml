@@ -18,27 +18,35 @@
     </select>
 
 
-    <select id="selectRolesByUserId" resultType="org.xiaoxingbomei.entity.SysRole">
+    <select id="getRolesByUserId" resultType="org.xiaoxingbomei.entity.SysRole">
         SELECT
-            r.role_key      as roleKey,
-            r.role_name     as roleName,
-            r.description   as description
+            r.role_key     as roleKey,
+            r.role_name    as roleName,
+            r.description  as description
         FROM sys_role r
                  JOIN sys_user_role ur
                       ON r.role_key = ur.role_key
         WHERE ur.user_id = #{userId}
     </select>
 
+    <select id="getAllRoles" resultType="org.xiaoxingbomei.entity.SysRole">
+        SELECT
+            r.role_key     as roleKey,
+            r.role_name    as roleName,
+            r.description  as description
+        FROM sys_role r
+    </select>
+
     <insert id="insertUserRoles">
         INSERT INTO sys_user_role
         (
         user_id,
-        role_id
+        role_key
         )
         VALUES
         <foreach collection="roleIds" item="roleId" separator=",">
             (
-            #{userId},
+            #{loginId},
             #{roleId}
             )
         </foreach>
@@ -49,13 +57,20 @@
         DELETE
         FROM  sys_user_role
         WHERE
-        user_id = #{userId}
-        AND role_id
-        IN
-        <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">
-            #{roleId}
-        </foreach>
+        user_id = #{loginId}
     </delete>
+
+<!--    <delete id="deleteUserRoles">-->
+<!--        DELETE-->
+<!--        FROM  sys_user_role-->
+<!--        WHERE-->
+<!--        user_id = #{userId}-->
+<!--        AND role_id-->
+<!--        IN-->
+<!--        <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">-->
+<!--            #{roleId}-->
+<!--        </foreach>-->
+<!--    </delete>-->
 
     <select id="selectPermIdsByRoleId" resultType="string">
         SELECT perm_id
@@ -67,26 +82,63 @@
         INSERT INTO sys_role_permission
         (
         role_key,
-        permission_id
+        permission_key
         )
         VALUES
-        <foreach collection="permissionIds" item="permissionId" separator=",">
+        <foreach collection="permissionKeys" item="permissionKey" separator=",">
             (
             #{roleKey},
-            #{permissionId}
+            #{permissionKey}
             )
         </foreach>
     </insert>
 
     <delete id="deleteRolePermissions">
         DELETE FROM sys_role_permission
-        WHERE role_id = #{roleId}
-        <if test="permissionIds != null and !permissionIds.isEmpty()">
-            AND permission_id IN
-            <foreach collection="permissionIds" item="permissionId" open="(" separator="," close=")">
-                #{permId}
+        WHERE role_key = #{roleKey}
+        <if test="permissionKeys != null and !permissionKeys.isEmpty()">
+            AND permission_key IN
+            <foreach collection="permissionKeys" item="permissionKey" open="(" separator="," close=")">
+                #{permissionKey}
             </foreach>
         </if>
     </delete>
+
+    <delete id="deleteRoleAllPermissions">
+        DELETE FROM sys_role_permission
+        WHERE role_key = #{roleKey}
+    </delete>
+
+    <select id="insertPermission" parameterType="org.xiaoxingbomei.entity.SysPermission">
+        INSERT INTO sys_permission
+        (
+            permission_key,
+            permission_name,
+            parent_id,
+            permission_type,
+            description,
+            status
+        )
+        VALUES
+            (
+              #{permissionKey},
+              #{permissionName},
+              #{parentId},
+              #{permissionType},
+              #{description},
+              #{status}
+            )
+    </select>
+
+    <select id="getAllPermission" resultType="org.xiaoxingbomei.entity.SysPermission">
+        SELECT
+            p.permission_key    as permissionKey,
+            p.permission_name   as permissionName,
+            p.parent_id         as parentId,
+            p.permission_type   as permissionType,
+            p.description       as description
+        FROM sys_permission p
+    </select>
+
 
 </mapper>

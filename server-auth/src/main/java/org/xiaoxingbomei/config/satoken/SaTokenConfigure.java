@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.xiaoxingbomei.common.entity.LoginInfo;
 import org.xiaoxingbomei.service.AuthService;
 
 import java.util.ArrayList;
@@ -50,7 +51,8 @@ public class SaTokenConfigure implements WebMvcConfigurer, StpInterface
     @Override
     public List<String> getRoleList(Object loginId, String loginType)
     {
-        List<String> roleList = authService.getRoleListByStore(loginId.toString());
+        LoginInfo loginInfo = (LoginInfo) StpUtil.getSessionByLoginId(loginId).get((String) loginId);
+        List<String> roleList = loginInfo.getRoleList();
         return roleList;
     }
 }

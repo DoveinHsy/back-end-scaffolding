@@ -16,14 +16,16 @@ public class ApiConstant
         public static final String getLoginId        = "/getLoginId";        // 获取当前登录用户id
 
         public static final String createRole         = "/createRole";        // 创建角色（单个）
-        public static final String getRoleList        = "/getRoleList";       // 查询角色
-        public static final String getRoleListByStore = "/getRoleListByStore";       // 查询角色
+        public static final String getRole            = "/getRole";           // 查询角色(指定或全部)
         public static final String updateRole         = "/updateRole";        // 修改角色（单个）
         public static final String deleteRole         = "/deleteRole";        // 删除角色（单个）
+        public static final String assignUserRoles    = "/assignUserRoles";   // 授予用户角色
 
-
-        public static final String getPermissionList = "/getPermissionList"; // 获取用户的权限
-
+        public static final String createPermission       = "/createPermission";      // 创建权限
+        public static final String getAllPermission       = "/getAllPermission";      // 获取全部的权限
+        public static final String assignRolePermissions  = "/assignRolePermissions"; // 给角色授予权限
+        public static final String getRolePermissions     = "/getRolePermissions";    // 获取角色所拥有的权限
+        public static final String getUserPermissions     = "/getUserPermissions";    // 获取用户所拥有的权限
 
     }
 

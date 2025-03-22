@@ -28,30 +28,34 @@
 
 - 技术简介：
 
-| 技术                  | 说明           | 官网                                            |
-|:--------------------| -------------- |:------------------------------------------------|
-| springboot          | web框架        | https://spring.io/projects/spring-boot          |
-| springcloud netflix | 分布式框架     | https://spring.io/projects/spring-cloud-netflix |
-| mybatis             | orm框架        | https://blog.mybatis.org/                       |
-| mybatis-plus        | orm框架        | https://baomidou.com/                           |
-| redis               | 缓存           | https://redis.io/                               |
-| mongodb             | 缓存           | https://www.mongodb.com/zh-cn                   |
-| caffeine            | 本地缓存       | https://github.com/ben-manes/caffeine           |
-| kafka               | 消息队列       | https://kafka.apache.org/                       |
-| rocketmq            | 消息队列       | https://rocketmq.apache.org/                       |
-| hutool              | 工具类         | https://hutool.cn/                              |
-| sa-token            | 权限框架       | https://sa-token.cc/doc.html#/                  |
-| oss                 | 对象存储       | https://www.aliyun.com/product/oss              |
-| minio               | 自建对象存储   | https://min.io/                                 |
-| mysql               | 数据库         | https://www.mysql.com/cn/                       |
-| swagger             | api文档框架    | https://swagger.io/                             |
-| docker              | 容器           | https://www.docker.com/                         |
-| nginx               | 代理服务器     | https://nginx.org/cn/                           |
-| elasticsearch       | 搜索引擎       |                                                 |
-| filebeat            | 采集agent      |                                                 |
-| logstash            | 采集agent      |                                                 |
-| kibanna             | 可视化分析工具 |                                                 |
-|                     |                |                                                 |
+| 技术                  | 说明      | 官网                                              |
+|:--------------------|---------|:------------------------------------------------|
+| springboot          | web框架   | https://spring.io/projects/spring-boot          |
+| springcloud netflix | 分布式框架   | https://spring.io/projects/spring-cloud-netflix |
+| apollo              | 配置中心    |                                                 |
+| mybatis             | orm框架   | https://blog.mybatis.org/                       |
+| mybatis-plus        | orm框架   | https://baomidou.com/                           |
+| redis               | 缓存      | https://redis.io/                               |
+| mongodb             | 缓存      | https://www.mongodb.com/zh-cn                   |
+| caffeine            | 本地缓存    | https://github.com/ben-manes/caffeine           |
+| jetcache            | 多级缓存框架  |                                                 |
+| kafka               | 消息队列    | https://kafka.apache.org/                       |
+| rocketmq            | 消息队列    | https://rocketmq.apache.org/                    |
+| hutool              | 工具类     | https://hutool.cn/                              |
+| sa-token            | 权限框架    | https://sa-token.cc/doc.html#/                  |
+| oss                 | 对象存储    | https://www.aliyun.com/product/oss              |
+| minio               | 对象存储    | https://min.io/                                 |
+| mysql               | 数据库     | https://www.mysql.com/cn/                       |
+| swagger             | api文档框架 | https://swagger.io/                             |
+| docker              | 容器      | https://www.docker.com/                         |
+| nginx               | 代理服务器   | https://nginx.org/cn/                           |
+| elasticsearch       | 搜索引擎    |                                                 |
+| filebeat            | 采集agent |                                                 |
+| logstash            | 采集agent |                                                 |
+| kibana              | 可视化分析工具 |                                                 |
+| easy-rules          | 规则引擎    |                                                 |
+| camunda             | 流程引擎    |                                                 |
+| sharding-jdbc       | 分库分表    |                                                 |
 
 
 
